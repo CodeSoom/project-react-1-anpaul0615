@@ -15,7 +15,7 @@ export const namespace = 'Grid';
 /**
  * Initial State
  */
-const initialState: GridState = {
+export const initialState: GridState = {
   pending: false,
   error: false,
   option: {
