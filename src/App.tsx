@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setGridOption } from './store/modules/grid';
 import { GridOption } from './store/types/grid'
 
-import GridContiner from './containers/GirdContiner';
+import GridContiner from './containers/GridContainer';
 
 /* Component Props/State */
 type Props = { 
