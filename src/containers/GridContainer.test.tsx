@@ -36,9 +36,9 @@ describe('GridContainer', () => {
       
       describe('with option', () => {
         it('renders Grid with LoadingCircle', () => {
-          const { getByText, getByRole } = renderGridContainer();
+          const { getByRole } = renderGridContainer();
           
-          expect(getByText(JSON.stringify(given.option))).not.toBeNull();
+          expect(getByRole('grid')).not.toBeNull();
           expect(getByRole('progressbar')).not.toBeNull();
         });
       });
@@ -48,9 +48,9 @@ describe('GridContainer', () => {
       given('pending', () => false);
 
       it('renders Grid without LoadingCircle', () => {
-        const { getByText, queryByRole } = renderGridContainer();
+        const { getByRole, queryByRole } = renderGridContainer();
 
-        expect(getByText(JSON.stringify(given.option))).not.toBeNull();
+        expect(getByRole('grid')).not.toBeNull();
         expect(queryByRole('progressbar')).toBeNull();
       });
     });

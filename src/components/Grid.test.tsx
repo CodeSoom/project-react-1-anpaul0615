@@ -16,9 +16,9 @@ describe('Grid', () => {
   describe('with option', () => {
     const option: GridOption = GRID_OPTION;
 
-    it('renders grid with option', () => {
-      const { getByText } = renderComponent(option);
-      expect(getByText(JSON.stringify(option))).not.toBeNull();
+    it('renders grid', () => {
+      const { getByRole } = renderComponent(option);
+      expect(getByRole('grid')).not.toBeNull();
     });
   });
 });

@@ -10,17 +10,14 @@ export default {
     {
       id: 'H1',
       name: 'HEADER 1',
-      valueType: typeof String,
     },
     {
       id: 'H2',
       name: 'HEADER 2',
-      valueType: typeof String,
     },
     {
       id: 'V1',
       name: 'VALUE 1',
-      valueType: typeof Number,
     },
   ],
 } as GridOption;

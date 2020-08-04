@@ -14,5 +14,6 @@ export type Data = Array<{
 }>;
 
 export type Columns = Array<{
-  [key: string]: any;
+  id: string;
+  name: string;
 }>;
