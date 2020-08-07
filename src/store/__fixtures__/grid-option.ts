@@ -20,4 +20,14 @@ export default {
       name: 'VALUE 1',
     },
   ],
+  focusedCell: {
+    x: 0,
+    y: 0,
+  },
+  selection: {
+    startColumnIndex: 0,
+    startRowIndex: 0,
+    endColumnIndex: 1,
+    endRowIndex: 1,
+  },
 } as GridOption;

@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSelection } from '../store/modules/grid';
 import { RootState } from '../store/types';
 
 import Grid from '../components/Grid';
@@ -14,10 +15,26 @@ const GridContainer: React.FC<Props> = () => {
   const isPending = useSelector((state:RootState) => state.Grid.pending);
   const option = useSelector((state:RootState) => state.Grid.option);
   
+  const dispatch = useDispatch();
+
+  function handleClickCell(x: number, y: number) {
+    dispatch(setSelection({
+      startColumnIndex: x, startRowIndex: y, endColumnIndex: x, endRowIndex: y,
+    }));
+  }
+
+  function handleChangeCellInput(value: string) {
+    // todo
+  }
+
   return (
     <>
       { isPending && <LoadingCircle />}
-      <Grid option={option} />
+      <Grid
+        option={option}
+        onClickCell={handleClickCell}
+        onChangeCellInput={handleChangeCellInput}
+      />
     </>
   );
 };

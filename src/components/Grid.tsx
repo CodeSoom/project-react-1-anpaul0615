@@ -2,16 +2,28 @@ import React from 'react';
 
 import GridCell from './GridCell';
 
-import { GridOption } from '../store/types/grid';
+import { GridOption, Cell, Selection } from '../store/types/grid';
 
 /* Component Props/State */
 type Props = {
   option: GridOption;
+  onClickCell: (colIdx: number, rowIdxy: number) => void;
+  onChangeCellInput: (value: string) => void;
 };
 
 /* Component */
-const Grid: React.FC<Props> = ({ option }) => {
-  const { columns, data } = option;
+const Grid: React.FC<Props> = ({ option, onClickCell, onChangeCellInput }) => {
+
+  function isFocused(focusedCell: Cell, colIdx: number, rowIdx: number) {
+    return focusedCell.x === colIdx && focusedCell.y === rowIdx;
+  }
+
+  function isInSelection(selection: Selection, colIdx: number, rowIdx: number) {
+    return (selection.startColumnIndex <= colIdx && selection.endColumnIndex >= colIdx)
+      && (selection.startRowIndex <= rowIdx && selection.endRowIndex >= rowIdx);
+  }
+  
+  const { columns, data, focusedCell, selection } = option;
   return (
     <table role="grid">
       <thead>
@@ -35,8 +47,17 @@ const Grid: React.FC<Props> = ({ option }) => {
                 {
                   columns.map((col, colIdx) => {
                     return (
-                      <td key={`data-column-${rowIdx}-${colIdx}`}>
-                        <GridCell editable={false} value={row[col.id]} />
+                      <td key={`data-column-${colIdx}`}>
+                        <GridCell
+                          columnIndex={colIdx}
+                          rowIndex={rowIdx}
+                          editable={false}
+                          value={row[col.id]}
+                          isFocused={focusedCell ? isFocused(focusedCell, colIdx, rowIdx) : false}
+                          isSelected={selection ? isInSelection(selection, colIdx, rowIdx) : false}
+                          onClick={onClickCell}
+                          onChange={onChangeCellInput}
+                        />
                       </td>
                     );
                   })
@@ -51,3 +72,4 @@ const Grid: React.FC<Props> = ({ option }) => {
 };
 
 export default Grid;
+export type GridProps = Props;

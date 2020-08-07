@@ -16,6 +16,7 @@ module.exports = {
   },
   setupFilesAfterEnv: [
     './jest.setup.ts',
+    'given2/setup',
   ],
   coverageThreshold: {
     global: {

@@ -21,6 +21,8 @@ export const initialState: GridState = {
   option: {
     data: [],
     columns: [],
+    focusedCell: null,
+    selection: null,
   },
 };
 
@@ -48,6 +50,18 @@ const slice = createSlice({
     hideLoadingCircle: (state) => {
       state.pending = false;
     },
+    setFocusedCell: (state, { payload: { x, y } }) => {
+      state.option.focusedCell = { x, y };
+    },
+    resetFocusedCell: (state) => {
+      state.option.focusedCell = initialState.option.focusedCell;
+    },
+    setSelection: (state, { payload: { startColumnIndex, startRowIndex, endColumnIndex, endRowIndex } }) => {
+      state.option.selection = { startColumnIndex, startRowIndex, endColumnIndex, endRowIndex };
+    },
+    resetSelection: (state) => {
+      state.option.focusedCell = initialState.option.focusedCell;
+    },
   },
   extraReducers: {
     [setGridOption.pending.type]: (state) => {
@@ -74,4 +88,8 @@ export const { reducer } = slice;
 export const {
   showLoadingCircle,
   hideLoadingCircle,
+  setFocusedCell,
+  resetFocusedCell,
+  setSelection,
+  resetSelection,
 } = slice.actions;
