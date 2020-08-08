@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setSelection } from '../store/modules/grid';
+import { setFocusedCell, setSelection } from '../store/modules/grid';
 import { RootState } from '../store/types';
 
 import Grid from '../components/Grid';
@@ -18,6 +18,7 @@ const GridContainer: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   function handleClickCell(x: number, y: number) {
+    dispatch(setFocusedCell({ x, y }));
     dispatch(setSelection({
       startColumnIndex: x, startRowIndex: y, endColumnIndex: x, endRowIndex: y,
     }));
