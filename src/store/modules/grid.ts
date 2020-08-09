@@ -50,11 +50,16 @@ const slice = createSlice({
     hideLoadingCircle: (state) => {
       state.pending = false;
     },
-    setFocusedCell: (state, { payload: { x, y } }) => {
-      state.option.focusedCell = { x, y };
+    setFocusedCell: (state, { payload: { x, y, isEditable = false } }) => {
+      state.option.focusedCell = { x, y, isEditable };
     },
     resetFocusedCell: (state) => {
       state.option.focusedCell = initialState.option.focusedCell;
+    },
+    toggleFocusedCellEditable: (state) => {
+      if (state.option.focusedCell) {
+        state.option.focusedCell.isEditable = !state.option.focusedCell.isEditable;
+      }
     },
     setSelection: (state, { payload: { startColumnIndex, startRowIndex, endColumnIndex, endRowIndex } }) => {
       state.option.selection = { startColumnIndex, startRowIndex, endColumnIndex, endRowIndex };
@@ -90,6 +95,7 @@ export const {
   hideLoadingCircle,
   setFocusedCell,
   resetFocusedCell,
+  toggleFocusedCellEditable,
   setSelection,
   resetSelection,
 } = slice.actions;

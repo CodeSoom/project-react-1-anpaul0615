@@ -23,6 +23,7 @@ export type Columns = Array<{
 export type Cell = {
   x: number;
   y: number;
+  isEditable: boolean,
 };
 
 export type Selection = {

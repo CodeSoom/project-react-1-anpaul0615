@@ -51,10 +51,10 @@ const Grid: React.FC<Props> = ({ option, onClickCell, onChangeCellInput }) => {
                         <GridCell
                           columnIndex={colIdx}
                           rowIndex={rowIdx}
-                          editable={false}
                           value={row[col.id]}
-                          isFocused={focusedCell ? isFocused(focusedCell, colIdx, rowIdx) : false}
                           isSelected={selection ? isInSelection(selection, colIdx, rowIdx) : false}
+                          isFocused={focusedCell ? isFocused(focusedCell, colIdx, rowIdx) : false}
+                          isEditable={focusedCell ? isFocused(focusedCell, colIdx, rowIdx) && focusedCell.isEditable : false}
                           onClick={onClickCell}
                           onChange={onChangeCellInput}
                         />

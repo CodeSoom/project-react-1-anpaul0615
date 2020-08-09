@@ -1,59 +1,61 @@
 import React from 'react';
 
+import TextEditBox from './TextEditBox';
+import TextBox from './TextBox';
+
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 
 /* Component Styles */
-const cell = (isSelected: boolean, isFocused: boolean) => css`
+const Style = (isSelected: boolean, isFocused: boolean) => css`
   label: normal;
   outline: none;
   border: 1px solid black;
-  ${isSelected && selectedCell}
-  ${isFocused && focusedCell}
-`;
-const selectedCell = css`
-  label: selected;
-  border-width: 2px;
-`;
-const focusedCell = css`
-  label: focused;
-  border-color: red;
+  ${isSelected && css`
+    label: selected;
+    border-width: 2px;
+  `}
+  ${isFocused && css`
+    label: focused;
+    border-color: red;
+  `}
 `;
 
 /* Component Props/State */
 type Props = {
-  rowIndex: number;
   columnIndex: number;
-  editable: boolean;
+  rowIndex: number;
   value: string | number;
   isSelected: boolean;
   isFocused: boolean;
+  isEditable: boolean;
   onClick: (colIdx: number, rowIdxy: number) => void;
   onChange: (value: string) => void;
 };
 
 /* Component */
-const Cell: React.FC<Props> = ({
-  rowIndex, columnIndex, editable, value, isSelected, isFocused, onClick, onChange
+const GridCell: React.FC<Props> = ({
+  columnIndex, rowIndex, value, isSelected, isFocused, isEditable, onClick, onChange
 }) => {
   return (
-    editable
-      ? <input
-          type='text'
-          data-testid='editable-cell'
-          css={cell(isSelected, isFocused)}
+    isEditable
+      ? <TextEditBox
+          columnIndex={columnIndex}
+          rowIndex={rowIndex}
           value={value}
-          onChange={({ target }) => onChange(target.value)}
+          style={Style(isSelected, isFocused)}
+          onChange={onChange}
         />
-      : <span
-          data-testid='non-editable-cell'
-          css={cell(isSelected, isFocused)}
-          onClick={() => onClick(columnIndex, rowIndex)}
-        >
-          {value}
-        </span>
+      : <TextBox
+          columnIndex={columnIndex}
+          rowIndex={rowIndex}
+          value={value}
+          style={Style(isSelected, isFocused)}
+          onClick={onClick}
+        />
+
   );
 };
 
-export default Cell;
+export default GridCell;
 export type GridCellProps = Props;

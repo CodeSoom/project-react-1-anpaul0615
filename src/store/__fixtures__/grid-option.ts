@@ -19,10 +19,11 @@ export default {
       id: 'V1',
       name: 'VALUE 1',
     },
-  ],
+  ], 
   focusedCell: {
     x: 0,
     y: 0,
+    isEditable: false,
   },
   selection: {
     startColumnIndex: 0,
