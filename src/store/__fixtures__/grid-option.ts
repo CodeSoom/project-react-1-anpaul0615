@@ -10,17 +10,25 @@ export default {
     {
       id: 'H1',
       name: 'HEADER 1',
-      valueType: typeof String,
     },
     {
       id: 'H2',
       name: 'HEADER 2',
-      valueType: typeof String,
     },
     {
       id: 'V1',
       name: 'VALUE 1',
-      valueType: typeof Number,
     },
-  ],
+  ], 
+  focusedCell: {
+    x: 0,
+    y: 0,
+    isEditable: false,
+  },
+  selection: {
+    startColumnIndex: 0,
+    startRowIndex: 0,
+    endColumnIndex: 1,
+    endRowIndex: 1,
+  },
 } as GridOption;
