@@ -1,24 +1,8 @@
-import React, { useEffect } from 'react';
-
-import { useDispatch } from 'react-redux';
-import { setGridOption } from './store/modules/grid';
-import { GridOption } from './store/types/grid'
+import React from 'react';
 
 import GridContiner from './containers/GridContainer';
 
-/* Component Props/State */
-type Props = { 
-  option?: GridOption;
-};
-
-/* Component */
-const App: React.FC<Props> = ({ option }) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setGridOption(option));
-  }, [option, dispatch]);
-
+const App: React.FC = () => {
   return <GridContiner />;
 }
 
