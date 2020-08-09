@@ -2,7 +2,7 @@ import {
   createSlice, createAsyncThunk,
 } from '@reduxjs/toolkit';
 
-import { validateGridOption } from '../../services/grid'
+import { validateGridOption, isValidGridCellLocation } from '../../services/grid'
 
 import { RootState } from '../types';
 import { GridState, GridOption } from '../types/grid';
@@ -61,6 +61,17 @@ const slice = createSlice({
         state.option.focusedCell.isEditable = !state.option.focusedCell.isEditable;
       }
     },
+    moveFocusedCell: (state, { payload: { x, y } }) => {
+      if (!state.option.focusedCell) {
+        return;
+      }
+      const { columns, data, focusedCell } = state.option;
+      if (!isValidGridCellLocation(x, y, focusedCell.x, focusedCell.y, columns.length - 1, data.length - 1)) {
+        return;
+      }
+      state.option.focusedCell.x += x;
+      state.option.focusedCell.y += y;
+    },
     setSelection: (state, { payload: { startColumnIndex, startRowIndex, endColumnIndex, endRowIndex } }) => {
       state.option.selection = { startColumnIndex, startRowIndex, endColumnIndex, endRowIndex };
     },
@@ -96,6 +107,7 @@ export const {
   setFocusedCell,
   resetFocusedCell,
   toggleFocusedCellEditable,
+  moveFocusedCell,
   setSelection,
   resetSelection,
 } = slice.actions;

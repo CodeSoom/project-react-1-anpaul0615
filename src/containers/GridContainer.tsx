@@ -1,7 +1,9 @@
 import React, { useRef } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setFocusedCell, setSelection, toggleFocusedCellEditable } from '../store/modules/grid';
+import {
+  setFocusedCell, setSelection, toggleFocusedCellEditable, moveFocusedCell
+ } from '../store/modules/grid';
 import { RootState } from '../store/types';
 
 import Grid from '../components/Grid';
@@ -35,6 +37,10 @@ const GridContainer: React.FC<Props> = () => {
   function handleKeyboardEvent(event: React.KeyboardEvent<HTMLDivElement>) {
     const { keyCode } = event;
     if (keyCode === KeyCode.ENTER) dispatch(toggleFocusedCellEditable());
+    if (keyCode === KeyCode.ARROW_LEFT) dispatch(moveFocusedCell({ x: -1, y: 0 }));
+    if (keyCode === KeyCode.ARROW_UP) dispatch(moveFocusedCell({ x: 0, y: -1 }));
+    if (keyCode === KeyCode.ARROW_RIGHT) dispatch(moveFocusedCell({ x: 1, y: 0 }));
+    if (keyCode === KeyCode.ARROW_DOWN) dispatch(moveFocusedCell({ x: 0, y: 1 }));
     ref.current?.focus();
   }
 
